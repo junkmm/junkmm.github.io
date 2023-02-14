@@ -217,3 +217,47 @@ master    Ready    control-plane   55m   v1.26.1
 worker1   Ready    <none>          42m   v1.26.1
 worker2   Ready    <none>          42m   v1.26.1
 ```
+
+## Pod 배포하기
+
+### Pod 배포
+
+간단한 명령어를 사용하여 Nginx 이미지를 사용하여 Pod를 배포 한다.
+
+```bash
+kubectl run web --image=nginx
+```
+
+아래 명령어를 사용해 Pod가 정상적으로 배포된 것을 확인할 수 있다.
+
+```bash
+kubectl get pod
+```
+
+```
+NAME   READY   STATUS    RESTARTS   AGE
+web    1/1     Running   0          80s
+```
+
+### Service 배포
+
+Pod에 있는 nginx에 접근하기 위해 expose 명령어로 노출시킨다.(Service NodePort 생성)
+
+```bash
+kubectl expose pod web --name=web-svc --type=NodePort --port=80 --target-port=80
+```
+
+아래 명령어를 사용해 노출된 NodePort번호를 확인하고, 해당 Port로 웹 브라우저를 통해 접근한다.
+
+```bash
+kubectl get svc
+```
+
+```
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+web-svc      NodePort    10.101.179.53   <none>        80:32215/TCP   88s
+```
+
+### 웹 브라우저 접속 확인
+
+![1676364723404](image/2022-02-14-kubernetes-cluster-config/1676364723404.png)
