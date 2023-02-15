@@ -69,4 +69,4 @@ NAME   READY   STATUS    RESTARTS   AGE
 web    1/1     Running   0          22h
 ```
 
-기존 kubectl 대신 k 로 입력해도 정상적으로 pod의 정보를 가져올 수 있다. 또한 k get po 까지 입력하고 Tab키를 눌러보면 자동으로 k get pod 명령어를 완성해 주는 것을 확인할 수 있다.
+기존 kubectl 대신 k 로 입력해도 정상적으로 pod의 정보를 가져올 수 있다. 또한 k get po 까지 입력하고 Tab키를 눌러보면 k get pod 명령어가 자동으로 작성 된다.
