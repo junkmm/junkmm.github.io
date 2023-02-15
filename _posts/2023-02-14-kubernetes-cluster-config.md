@@ -1,6 +1,5 @@
 ---
 layout: post
-title: "Kubernetes 클러스터 구축하기"
 categories: Kubernetes
 tags: [kubernetes, docker, pod]
 ---
@@ -250,4 +249,5 @@ web-svc      NodePort    10.101.179.53   <none>        80:32215/TCP   88s
 ```
 
 ### 웹 브라우저 접속 확인
+
 ![1676364723404](/assets/images/kubernetes/1676364723404.png)
