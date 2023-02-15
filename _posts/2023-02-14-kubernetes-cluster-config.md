@@ -18,7 +18,7 @@ Kubernetes를 구성하는 방법은 여러가지가 있다.
 
 ### Kubernetes 클러스터 구성요소
 
-![1676359482967](/_posts/image/2022-02-14-kubernetes-cluster-config/1676359482967.png)
+![1676359482967](/assets/images/kubernetes/1676359482967.png)
 
 * Master Node 구성 요소
 
@@ -250,5 +250,4 @@ web-svc      NodePort    10.101.179.53   <none>        80:32215/TCP   88s
 ```
 
 ### 웹 브라우저 접속 확인
-
-![1676364723404](/_posts/image/2022-02-14-kubernetes-cluster-config/1676364723404.png)
+![1676364723404](/assets/images/kubernetes/1676364723404.png)
