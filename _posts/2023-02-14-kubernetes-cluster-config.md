@@ -18,7 +18,7 @@ Kubernetes를 구성하는 방법은 여러가지가 있다.
 
 ### Kubernetes 클러스터 구성요소
 
-![1676359482967](image/2022-02-14-kubernetes-cluster-config/1676359482967.png)
+![1676359482967](./image/2022-02-14-kubernetes-cluster-config/1676359482967.png)
 
 * Master Node 구성 요소
 
@@ -58,14 +58,14 @@ Kubernetes를 구성하는 방법은 여러가지가 있다.
 
 Master, Worker1, Worker2 노드에 동일하게 아래 명령을 통해 패키지 설치 및 구성을 진행한다. Kubernetes 컨테이너 엔진은 Docker를 사용한다.
 
-<h4> Swap Memory 비활성화
+#### Swap Memory 비활성화
 
 ```bash
 sudo swapoff /swap.img
 sudo sed -i -e '/swap.img/d' /etc/fstab
 ```
 
-<h3>Docker Engine 설치
+#### Docker Engine 설치
 
 ```bash
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -74,7 +74,7 @@ systemctl restart docker
 systemctl enable docker
 ```
 
-<h3>Container Runtime 설치
+#### Container Runtime 설치
 
 Kubernetes는 1.24 이후 Docker 컨테이너 런타임의 기본 지원을 종료하였기 때문에 cri-docker를 추가 설치하여 Docker와 Kubernetes를 연결해야 한다.
 
@@ -110,7 +110,7 @@ cat <<EOF | sudo tee /etc/docker/daemon.json
 EOF
 ```
 
-<h3>Kernel Forwarding, kube-proxy 설정
+#### Kernel Forwarding, kube-proxy 설정
 
 ```bash
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
@@ -124,7 +124,7 @@ net.bridge.bridge-nf-call-iptables = 1
 EOF
 ```
 
-<h3>kubelet, kubeadm, kubectl 설치
+#### kubelet, kubeadm, kubectl 설치
 
 ```bash
 sudo apt-get update
@@ -140,19 +140,19 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 ### Master Node 구성
 
-<h3>클러스터 생성 시 필요한 이미지 Pull
+#### 클러스터 생성 시 필요한 이미지 Pull
 
 ```bash
 sudo kubeadm config images pull --cri-socket unix:///run/cri-dockerd.sock
 ```
 
-<h3>Cluster 생성
+#### Cluster 생성
 
 ```bash
 sudo kubeadm init --pod-network-cidr=10.10.0.0/16 --apiserver-advertise-address={master-ip} --cri-socket /var/run/cri-dockerd.sock
 ```
 
-<h3>워커 노드의 Join을 위해 명령어를 복사 해 둔다.
+#### 워커 노드의 Join을 위해 명령어를 복사 해 둔다.
 
 ```bash
 kubeadm join {master-ip}:6443 --token a23v07.704hxxkjfv476512 \
@@ -160,7 +160,7 @@ kubeadm join {master-ip}:6443 --token a23v07.704hxxkjfv476512 \
         --cri-socket /var/run/cri-dockerd.sock
 ```
 
-<h3> kubeadm 을 root 처럼 사용하기 위한 추가 설정
+#### kubeadm 을 root 처럼 사용하기 위한 추가 설정
 
 ```bash
 mkdir -p $HOME/.kube
@@ -182,13 +182,13 @@ kubeadm join {master-ip}:6443 --token a23v07.704hxxkjfv476512 \
 
 CNI(Container Network Interface)는 컨테이너 네트워크를 구성하기 위한 플러그인이다. weavenet, calico 등의 오픈소스 플러그인이 존재하는데 caclico라는 CNI를 사용하여 구성한다. 이 작업은 `Master Node`에서 진행해야 한다.
 
-<h3> Calico 패키지 설치
+#### Calico 패키지 설치
 
 ```bash
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml
 ```
 
-<h3> CNI Network 정의
+#### CNI Network 정의
 
 Master Node에서 클러스터 생성(kubeadm init)할 때 pod network의 범위를 10.10.0.0/16으로 지정했기 때문에, Calico의 custom-resources.yaml 파일을 다운로드 하고 Pod Network 설정을 변경한 후 배포한다.
 
@@ -251,4 +251,4 @@ web-svc      NodePort    10.101.179.53   <none>        80:32215/TCP   88s
 
 ### 웹 브라우저 접속 확인
 
-![1676364723404](image/2022-02-14-kubernetes-cluster-config/1676364723404.png)
+![1676364723404](./image/2022-02-14-kubernetes-cluster-config/1676364723404.png)
