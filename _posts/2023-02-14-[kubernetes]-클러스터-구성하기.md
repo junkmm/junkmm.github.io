@@ -3,7 +3,7 @@ layout: post
 categories: Kubernetes
 tags: [kubernetes, docker, pod]
 ---
-# Kubernetes 클러스터 구축하기
+# Kubernetes 클러스터 구성하기
 
 ## Kubernetes 클러스터 개요
 
