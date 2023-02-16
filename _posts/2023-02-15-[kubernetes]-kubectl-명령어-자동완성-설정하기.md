@@ -1,5 +1,6 @@
 ---
 layout: post
+title: 
 categories: Kubernetes
 tags: [kubernetes, kubectl]
 ---

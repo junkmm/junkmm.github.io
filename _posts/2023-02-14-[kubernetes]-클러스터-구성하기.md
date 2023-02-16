@@ -1,5 +1,6 @@
 ---
 layout: post
+title: 
 categories: Kubernetes
 tags: [kubernetes, docker, pod]
 ---
@@ -36,7 +37,7 @@ Kubernetes를 구성하는 방법은 여러가지가 있다.
 
 `Kubelet`은 자신의 노드에 배치 된 `Pod`의 상태를 모니터링 한다, 만약 `Pod`가 죽으면 `Kubelet`은 `API-Server`에게 알리고, `API-Server`는 `Controller` → `Scheduler`에 `Pod` 배치를 명령하여 새로운 `Pod`를 배치하도록 해준다.
 
-## Kubernetes 클러스터 구축
+## Kubernetes 클러스터 구성
 
 ### 목표
 
