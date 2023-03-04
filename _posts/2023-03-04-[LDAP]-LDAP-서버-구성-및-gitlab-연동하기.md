@@ -5,7 +5,9 @@ categories: infra
 tags: [infra, ldap, openldap, gitlab]
 ---
 ![1-1](/assets/images/infra/1-1.png)
+
 # LDAP 서버 구성하기
+
 ## LDAP 인증이란?
 LDAP(Lightweight Directory Access Protocol)은 사용자가 조직, 구성원 등에 대한 데이터를 찾는데 도움이 되는 프로토콜이다.
 
@@ -33,14 +35,14 @@ apt-get update
 apt-get install slapd ldap-utils
 ```
 패키지 설치 중 아래와 같이 LDAP 관리자 계정(admin)의 비밀번호 설정 화면에서 비밀번호를 입력하고 OK 버튼을 클릭한다.
-![1-3](/assets/images/infra/1-3.png)
+![1-3](/assets/images/infra/1-3.PNG)
 ### STEP 2. OpenLDAP 환경 설정하기
 아래 명령어를 입력하여 LDAP의 환경 설정을 진행한다.
 ```
 dpkg-reconfigure slapd
 ```
 ![1-4](/assets/images/infra/1-4.png)
-*no* 선택
+**no** 선택
 ![1-5](/assets/images/infra/1-5.png)
 사용할 DNS Domain을 입력한다. 그림과 같이 *junkmm.io*를 입력하게 되면 'dc=junkmm,dc=io'라는 LDAP 디렉토리의 base DN을 생성하게 된다.
 ![1-6](/assets/images/infra/1-6.png)
@@ -48,10 +50,9 @@ dpkg-reconfigure slapd
 ![1-7](/assets/images/infra/1-7.png)
 관리자 이름을 입력한다.
 ![1-8](/assets/images/infra/1-8.png)
-*no* 선택
+**no** 선택
 
 slapd가 제거됐을 때 DB 정보를 지우지 않도록 설정
 ![1-9](/assets/images/infra/1-9.png)
-*yes* 선택
-
+**yes** 선택
 기존의 LDAP 서버의 데이터베이스 파일이 남아있을 경우 새로운 데이터베이스 생성 시 기존 파일을 옮기는 설정
