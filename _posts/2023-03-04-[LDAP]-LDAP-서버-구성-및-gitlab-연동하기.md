@@ -32,5 +32,5 @@ apt-get update
 apt-get install slapd ldap-utils
 ```
 패키지 설치 중 아래와 같이 LDAP 관리자 계정(admin)의 비밀번호 설정 화면에서 비밀번호를 입력하고 OK 버튼을 클릭한다.
-![1-3](/assets/images/infra/1-3.png)
+![1-3](/assets/images/infra/1-3.PNG)
 ### STEP 2. OpenLDAP 환경 설정하기
