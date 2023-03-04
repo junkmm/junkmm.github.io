@@ -7,6 +7,7 @@ tags: [infra, ldap, openldap, gitlab]
 ![1-1](/assets/images/infra/1-1.png)
 
 # LDAP 서버 구성하기
+# LDAP 서버 구성하기
 
 ## LDAP 인증이란?
 LDAP(Lightweight Directory Access Protocol)은 사용자가 조직, 구성원 등에 대한 데이터를 찾는데 도움이 되는 프로토콜이다.
