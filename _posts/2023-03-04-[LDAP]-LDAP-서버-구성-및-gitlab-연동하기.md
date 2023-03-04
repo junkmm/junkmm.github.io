@@ -44,3 +44,14 @@ dpkg-reconfigure slapd
 ![1-5](/assets/images/infra/1-5.png)
 사용할 DNS Domain을 입력한다. 그림과 같이 *junkmm.io*를 입력하게 되면 'dc=junkmm,dc=io'라는 LDAP 디렉토리의 base DN을 생성하게 된다.
 ![1-6](/assets/images/infra/1-6.png)
+조직 이름을 입력한다.
+![1-7](/assets/images/infra/1-7.png)
+관리자 이름을 입력한다.
+![1-8](/assets/images/infra/1-8.png)
+*no* 선택
+
+slapd가 제거됐을 때 DB 정보를 지우지 않도록 설정
+![1-9](/assets/images/infra/1-9.png)
+*yes* 선택
+
+기존의 LDAP 서버의 데이터베이스 파일이 남아있을 경우 새로운 데이터베이스 생성 시 기존 파일을 옮기는 설정
