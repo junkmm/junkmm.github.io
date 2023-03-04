@@ -107,12 +107,12 @@ modifyTimestamp: 20230304141442Z
 </div>
 </details>
 
-## LDAP Account Manager 설치하기
+# LDAP Account Manager 설치하기
 LDAP Account Manager는 웹(php) 기반의 LDAP 관리 툴이다. 편의상 LAM이라고 부르는 것 같다. LAM을 사용하면 LDAP 디렉토리 내 객체를 관리하는데 있어 편리성을 제공한다.
 이 LAM을 통해서 LDAP내 계정을 생성해보도록 하자.
 ## STEP 1. LAM 설치하기
 아래 명령어를 통해 LAM을 설치한다.
-```
+```bash
 apt-get install ldap-account-manager
 ```
 ## STEP 2. LAM 프로필 설정하기
@@ -134,3 +134,31 @@ Security settings의 List of valid users에 `cn=admin,dc=my-junkmm,dc=io` 입력
 
 ![1-15](/assets/images/infra/1-15.png)
 Profile password에 LAM 서버 프로필 기본 비밀번호 변경 `lam` -> `변경 비밀번호`
+
+![1-16](/assets/images/infra/1-16.png)
+상단 탭에서 `Account types` 클릭
+
+![1-17](/assets/images/infra/1-17.png)
+Active account types에서 사진과 같이 구성, User, Group 객체 정의
+
+모든 설정을 완료했으면 하단 `save` 버튼을 클릭한다.
+
+## STEP 3. Group 생성하기
+![1-18](/assets/images/infra/1-18.png)
+LDAP 구성 시 설정했던 admin의 비밀번호 입력 후 Login
+
+![1-19](/assets/images/infra/1-19.png)
+Groups 탭의 `New group`버튼 클릭
+
+![1-20](/assets/images/infra/1-20.png)
+Group name을 입력하고 `Save` 클릭
+
+![1-21](/assets/images/infra/1-21.png)
+그룹 List에 group-1이 생성된 것을 확인할 수 있다.
+
+## STEP 4. User 생성하기
+![1-22](/assets/images/infra/1-22.png)
+Users 탭의 `New user` 클릭
+
+![1-23](/assets/images/infra/1-23.png)
+Personal 탭의 `Last name` 필드에 ID 입력
