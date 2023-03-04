@@ -185,3 +185,61 @@ sudo apt-get install -y curl openssh-server ca-certificates tzdata perl
 curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash
 sudo apt-get install gitlab-ce
 ```
+
+## STEP 3. GitLab 서버 재시작
+```bash
+sudo gitlab-ctl reconfigure
+sudo gitlab-ctl restart
+```
+
+## STEP 4. 설치 확인
+![1-27](/assets/images/infra/1-27.png)
+웹 브라우저로 `http://(server-ip)`에 접속하여 GitLab 정상 작동 확인
+
+## STEP 5. LDAP 연결을 위한 필수 패키지 설치
+```bash
+sudo apt-get update
+sudo apt-get install -y libnss-ldapd libpam-ldap
+```
+![1-28](/assets/images/infra/1-28.png)
+![1-29](/assets/images/infra/1-29.png)
+![1-30](/assets/images/infra/1-30.png)
+![1-31](/assets/images/infra/1-31.png)
+![1-32](/assets/images/infra/1-32.png)
+![1-33](/assets/images/infra/1-33.png)
+![1-34](/assets/images/infra/1-34.png)
+
+## STEP 6. GitLab 설정 파일 변경
+GitLab 설정 파일인 `/etc/gitlab/gitlab.rb` 파일 수정
+```bash
+ gitlab_rails['ldap_enabled'] = true
+ gitlab_rails['prevent_ldap_sign_in'] = false
+
+###! **remember to close this block with 'EOS' below**
+ gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
+   main: # 'main' is the GitLab 'provider ID' of this LDAP server
+     label: 'welcome to junkmm.io'
+     host: '192.168.10.100'
+     port: 389
+     uid: 'uid'
+     bind_dn: 'dc=junkmm,dc=io'
+     password: 'password'
+     encryption: 'plain' # "start_tls" or "simple_tls" or "plain"
+     base: 'dc=junkmm,dc=io'
+EOS
+```
+
+## STEP 7. GitLab 서버 재시작
+```bash
+sudo gitlab-ctl reconfigure
+sudo gitlab-ctl restart
+```
+![1-35](/assets/images/infra/1-35.png)
+GitLab 구성 파일을 편집 및 서버 재시작을 완료하면 사진과 같이 로그인 화면이 변경된 것을 확인할 수 있다.
+
+# 마지막, GitLab에서 LDAP 계정으로 로그인 해보기
+![1-36](/assets/images/infra/1-36.png)
+LDAP Account Manager로 생성한 `tomas`계정으로 로그인 해보자.
+
+![1-37](/assets/images/infra/1-37.png)
+로그인 성공!
