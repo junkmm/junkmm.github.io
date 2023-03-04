@@ -1,6 +1,6 @@
 ---
 layout: post
-title: LDAP 서버 구성 및 gitlab 연동하기
+title: LDAP과 GitLab 연동해서 로그인 해보기
 categories: infra
 tags: [infra, ldap, openldap, gitlab]
 ---
