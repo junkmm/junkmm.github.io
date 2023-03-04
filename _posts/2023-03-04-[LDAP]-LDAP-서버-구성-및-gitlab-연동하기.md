@@ -162,3 +162,26 @@ Users 탭의 `New user` 클릭
 
 ![1-23](/assets/images/infra/1-23.png)
 Personal 탭의 `Last name` 필드에 ID 입력
+
+![1-24](/assets/images/infra/1-24.png)
+Unix 탭의 `Set password` 클릭
+
+![1-25](/assets/images/infra/1-25.png)
+생성한 계정의 비밀번호 설정
+
+![1-26](/assets/images/infra/1-26.png)
+`Save` 클릭하여 `tomas`계정 생성
+
+# GitLab 설치하기
+GitLab Application은 LDAP과 별도의 서버에 구축한다.
+## STEP 1. GitLab에 필요한 패키지 설치하기
+```bash
+sudo apt-get update
+sudo apt-get install -y curl openssh-server ca-certificates tzdata perl
+```
+
+## STEP 2. GitLab 설치하기
+```bash
+curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash
+sudo apt-get install gitlab-ce
+```
