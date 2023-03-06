@@ -213,16 +213,6 @@ highlighter: pygments
 # Pygments 코드 스타일 설정
 # 색상을 바꾸려면 여기서 theme 값을 변경하면 됩니다.
 # 더 많은 스타일은 https://jwarby.github.io/jekyll-pygments-themes/languages/ruby.html에서 확인 가능합니다.
-pygments:
-  enable: true
-  lexer: markdown
-  # 여기서 색상을 변경하면 됩니다.
-  # 아래는 예시입니다.
-  options:
-    bgcolor: '#f8f8f8'
-    style: 'monokai'
-
-
 
 markdown: kramdown
 kmarkdown:
