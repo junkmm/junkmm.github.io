@@ -178,6 +178,65 @@ tags: [Kubernetes, etcd]
   worker-2          Ready    <none>          4m35s   v1.26.3
   ```
 
+## Step 3. 구성 확인하기
+
+### 1. etcd 구성 확인하기
+   k8s cluster 구성 과정에 etcd와 관련된 설정을 자동적으로 구성하여 아래와 같이 `control-plane-2`가 Leader로 선정된 것을 확인할 수 있다.
+   * member list: 현재 etcd 클러스터의 멤버 리스트 조회
+
+     ```bash
+     sudo ETCDCTL_API=3 etcdctl --endpoints=https://control-plane-1:2379,<https://control-plane-2:2379>,<https://control-plane-3:2379> \\
+     --cacert=/etc/kubernetes/pki/etcd/ca.crt \\
+     --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \\
+     --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \\
+     member list --write-out=table
+     ```
+
+     ```bash
+     +------------------+---------+-----------------+------------------------------+------------------------------+
+     |        ID        | STATUS  |      NAME       |          PEER ADDRS          |         CLIENT ADDRS         |
+     +------------------+---------+-----------------+------------------------------+------------------------------+
+     | 694af08b76f376ce | started | control-plane-2 | <https://192.168.219.132:2380> | <https://192.168.219.132:2379> |
+     | 89d27bee4d9c9ec2 | started | control-plane-3 | <https://192.168.219.133:2380> | <https://192.168.219.133:2379> |
+     | f22da0b997fe8548 | started | control-plane-1 | <https://192.168.219.131:2380> | <https://192.168.219.131:2379> |
+     +------------------+---------+-----------------+------------------------------+------------------------------+
+     ```
+   * endpoint health: etcd 클러스터 내 모든 엔드포인트의 건강 상태 조회
+
+     ```bash
+     sudo ETCDCTL_API=3 etcdctl --endpoints=https://control-plane-1:2379,<https://control-plane-2:2379>,<https://control-plane-3:2379> \\
+     --cacert=/etc/kubernetes/pki/etcd/ca.crt \\
+     --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \\
+     --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \\
+     endpoint health
+     ```
+
+     ```bash
+     <https://control-plane-3:2379> is healthy: successfully committed proposal: took = 2.067495ms
+     <https://control-plane-1:2379> is healthy: successfully committed proposal: took = 2.134117ms
+     <https://control-plane-2:2379> is healthy: successfully committed proposal: took = 1.098723ms
+     ```
+   * endpoint status: etcd 클러스터 내 모든 엔드포인트의 상태 정보 조회
+
+     ```bash
+     sudo ETCDCTL_API=3 etcdctl --endpoints=https://control-plane-1:2379,<https://control-plane-2:2379>,<https://control-plane-3:2379> \\
+     --cacert=/etc/kubernetes/pki/etcd/ca.crt \\
+     --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \\
+     --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \\
+     endpoint status --write-out=table
+     ```
+
+     ```bash
+     +------------------------------+------------------+---------+---------+-----------+-----------+------------+
+     |           ENDPOINT           |        ID        | VERSION | DB SIZE | IS LEADER | RAFT TERM | RAFT INDEX |
+     +------------------------------+------------------+---------+---------+-----------+-----------+------------+
+     | <https://control-plane-1:2379> | f22da0b997fe8548 |   3.5.6 |  4.2 MB |     false |         5 |      75355 |
+     | <https://control-plane-2:2379> | 694af08b76f376ce |   3.5.6 |  4.2 MB |      true |         5 |      75355 |
+     | <https://control-plane-3:2379> | 89d27bee4d9c9ec2 |   3.5.6 |  4.1 MB |     false |         5 |      75355 |
+     +------------------------------+------------------+---------+---------+-----------+-----------+------------+
+     ```
+
+
 ## Reference
 
 * [https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/)
