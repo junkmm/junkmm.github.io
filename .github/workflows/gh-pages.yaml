@@ -1,5 +1,8 @@
 name: GitHub Pages
 
+permissions:
+  contents: write  # GitHub Pages에 푸시할 수 있도록 쓰기 권한을 부여
+
 on:
   push:
     branches:
