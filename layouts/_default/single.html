@@ -55,10 +55,8 @@
         {{ template "_internal/disqus.html" . }}
       {{ end }}
       {{ if .Site.Params.commentoEnable }}
-        {{ partial "commento.html" . }}
+        {{ partial "giscus.html" . }}
       {{ end }}
-	  {{ template "particals/giscus.html" . }}
-	  <h1>Single_test</h1>
       </div>
     </div>
 
