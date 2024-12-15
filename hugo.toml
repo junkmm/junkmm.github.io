@@ -2,3 +2,5 @@ baseURL = 'https://junkmm.github.io/'
 languageCode = 'en-us'
 title = 'My New Hugo Site'
 theme = 'ananke'
+[params]
+  commentoEnable = true
