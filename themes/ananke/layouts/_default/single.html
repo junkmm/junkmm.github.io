@@ -55,7 +55,7 @@
         {{ template "_internal/disqus.html" . }}
       {{ end }}
       {{ if .Site.Params.commentoEnable }}
-        {{- partial "commento.html" . -}}
+        {{ partial "giscus.html" . }}
       {{ end }}
       </div>
     </div>
