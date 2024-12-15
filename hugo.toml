@@ -2,3 +2,17 @@ baseURL = 'https://junkmm.github.io/'
 languageCode = 'en-us'
 title = 'My New Hugo Site'
 theme = 'ananke'
+
+[params.giscus]
+repo = "junkmm/junkmm.github.io"
+repoID = "R_kgDONNpiNQ"
+category = "Announcements"
+categoryID = "DIC_kwDONNpiNc4ClPEu"
+mapping = "og:title"
+dataStrict = "1"
+reactionsEnabled = "1"
+emitMetadata = "0"
+inputPosition = "bottom"
+theme = "preferred_color_scheme"
+lang = "ko"
+loading = "lazy"
